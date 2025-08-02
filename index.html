@@ -1,0 +1,446 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mouse-drag&derab</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        overflow: hidden;
+
+    }
+
+    main {
+        background-image: url(img/11.jpg);
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 100vh;
+        background-color: black;
+        cursor: none;
+
+
+
+    }
+
+    .box {
+        width: 100%;
+        height: 50px;
+        position: fixed;
+        background-color: rgb(60, 54, 54);
+        bottom: 0;
+        left: 0;
+        padding: 10px;
+        border: solid 1px rgb(233, 217, 217);
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        cursor: none;
+        gap: 5px;
+
+
+        >* {
+            /* border: solid 1px black; */
+            height: 50px;
+            display: flex;
+            align-items: center;
+            padding: 10px 5px;
+            cursor: none;
+
+
+        }
+
+        >.start {
+            width: 5%;
+
+
+            >a {
+                width: 100%;
+                font-size: 25px;
+                text-decoration: none;
+                color: white;
+                cursor: none;
+
+            }
+
+
+        }
+
+        >.serch {
+            width: 15%;
+        }
+
+        >.file {
+            width: 65%;
+            gap: 15px;
+            font-size: 25px;
+
+
+
+            .js {
+                color: greenyellow;
+                cursor: none;
+
+            }
+
+            .ch {
+                color: red;
+                cursor: none;
+            }
+
+            .fox {
+                color: rgb(11, 11, 138);
+                cursor: none;
+            }
+
+            .fol {
+                color: gold;
+                cursor: none;
+            }
+        }
+
+        >.usb {
+            width: 20%;
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            gap: 15px;
+            font-size: 20px;
+
+            .rss {
+                color: white;
+                cursor: none;
+            }
+
+            >p {
+
+                >a {
+                    cursor: none;
+                    text-decoration: none;
+                    font-size: 16px;
+                    color: white;
+                }
+            }
+
+        }
+
+
+    }
+
+    .c {
+        display: flex;
+        border-radius: 50%;
+        position: absolute;
+        z-index: 1000;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+
+
+    }
+
+    .cs {
+        width: 5px;
+        height: 5px;
+        background-color: rgb(79, 217, 9);
+
+    }
+
+    .cb {
+        width: 60px;
+        height: 60px;
+        border: 2px solid rgb(173, 6, 65);
+        transition: .2s ease-out;
+
+    }
+
+    .cd {
+        width: 30px;
+        height: 30px;
+        border: 3px solid rgb(16, 1, 118);
+        transition: .2s ease-out;
+    }
+
+    .rc {
+        width: 250px;
+        padding: 10pxx;
+        background-color: rgb(30, 30, 30);
+        border-radius: 20px;
+        position: absolute;
+        display: none;
+        align-items: center;
+
+        >li {
+            /* text-transform: uppercase; */
+            list-style-type: none;
+            height: 40px;
+            font-family: 'Times New Roman', Times, serif;
+            display: flex;
+            /* justify-content: center; */
+            justify-content: space-evenly;
+            align-items: center;
+
+            >p {
+                color: bisque;
+                font-size: 12px;
+            }
+
+            .com {
+                font-size: 18px;
+                color: white;
+            }
+
+            /* padding-right: 70px; */
+            >a {
+                cursor: none;
+                text-decoration: none;
+                font-size: 16px;
+                color: rgb(238, 224, 224);
+
+
+            }
+
+            &:hover {
+                background-color: rgb(190, 45, 5);
+
+            }
+
+            &:nth-of-type(2) {
+                border-bottom: 1px solid rgba(0, 0, 0, 0.511);
+            }
+
+            &:nth-of-type(5) {
+                border-bottom: 1px solid rgba(0, 0, 0, 0.556);
+            }
+
+        }
+
+    }
+
+    .drag {
+        width: 200px;
+        height: 200px;
+        background-color: rgba(255, 0, 0, 0);
+        position: absolute;
+        top: 60px;
+        left: 60px;
+        z-index: 999;
+        cursor: none;
+
+        >img {
+            width: 100%;
+            height: 100%;
+
+        }
+
+    }
+
+    .drop {
+        width: 250px;
+        height: 250px;
+        background-color: rgba(255, 99, 71, 0);
+        position: absolute;
+        bottom: 60px;
+        right: 40px;
+        cursor: none;
+
+        >img {
+            width: 100%;
+            height: 100%;
+
+        }
+    }
+
+
+
+
+    .zero {
+        top: 10px !important;
+        left: 10px !important;
+        transform: translate(0, 0) !important;
+    }
+
+    .next {
+        border-radius: 70%;
+        top: calc(100vh - 90px) !important;
+        left: calc(100% - 90px) !important;
+        transition: 1s;
+        background-color: rgba(0, 0, 0, 0);
+    }
+</style>
+
+<body>
+    <main>
+        <div class="cs c"></div>
+        <div class="cb c"></div>
+        <div class="cd c"></div>
+        <ul class="rc">
+            <li><a href="https://yahoo.com">Peek</a>
+                <p>Shift+F8</p>
+            </li>
+            <li><a href="https://yahoo.com">Refresh</a>
+                <p>Shift+F5</p>
+            </li>
+
+            <li><a href="https://yahoo.com">Cut</a>
+                <p>Ctrl+X</p>
+            </li>
+            <li><a href="https://yahoo.com">Copy</a>
+                <p>Ctrl+C</p>
+            </li>
+            <li><a href="https://yahoo.com">Paste</a>
+                <p>Ctrl+V</p>
+            </li>
+
+            <li><span><i class="bi bi-pc-display-horizontal com"></i></span>
+                <a href="https://yahoo.com">Display settings</a>
+
+            </li>
+            <li><span><i class="bi bi-person-workspace com"></i></span>
+                <a href="https://yahoo.com">personalize sos</a>
+
+            </li>
+        </ul>
+    </main>
+    <div class="box">
+        <div class="start"><a href=""><i class="bi bi-windows win"></i></a></div>
+        <div class="serch">
+            <input type="text" name="" id="" placeholder="serch.. ">
+        </div>
+        <div class="file">
+            <span><a href=""><i class="bi bi-folder-symlink-fill fol"></i></a></span>
+            <span><a href=""><i class="bi bi-browser-chrome ch"></i></a></span>
+            <span><a href=""><i class="bi bi-browser-firefox fox"></i></a></span>
+            <span><a href=""><i class=" bi bi-javascript js "></i></a></span>
+            <span><a href=""><i class="bi bi-css js"></i></a></span>
+        </div>
+        <div class="usb">
+            <span><a href=""><i class="bi bi-bluetooth rss"></i></a></span>
+            <span><a href=""><i class="bi bi-battery-charging rss"></i></a></span>
+            <span><a href=""><i class="bi bi-globe2 rss"></i></a></span>
+            <span><a href=""><i class="bi bi-pc-display-horizontal rss"></i></a></span>
+            <span><a href=""><i class="bi bi-usb-plug rss"></i></a></span>
+            <p> <a href="">4:40PM</a></p>
+        </div>
+    </div>
+
+    <div class="drag">
+        <img src="img/b22.png" alt="">
+    </div>
+
+    <div class="drop">
+        <img src="img/pad1.png" alt="">
+    </div>
+
+</body>
+
+<script>
+    const cs = document.querySelector('.cs')
+    const cb = document.querySelector('.cb')
+    const cd = document.querySelector('.cd')
+    const rc = document.querySelector('.rc')
+    const main = document.querySelector('main')
+
+    let w = main.clientWidth
+    let h = main.clientHeight
+
+    window.addEventListener('mousemove', (e) => {
+        let x = e.clientX
+        let y = e.clientY
+        let x1 = e.clientX
+        let y1 = e.clientY
+
+        cs.style.top = y + 'px'
+        cs.style.left = x + 'px'
+        cb.style.top = y + 'px'
+        cb.style.left = x + 'px'
+        cd.style.top = y + 'px'
+        cd.style.left = x + 'px'
+    })
+    window.addEventListener('mousedown', () => {
+        cs.style.transform = ' translate(-50%, -50%) scale(1.3)'
+        cb.style.transform = ' translate(-50%, -50%) scale(.7)'
+    })
+    window.addEventListener('mouseup', () => {
+        cs.style.transform = ' translate(-50%, -50%) scale(1)'
+        cb.style.transform = ' translate(-50%, -50%) scale(1)'
+
+    })
+    window.addEventListener('mouseup', () => {
+        cd.style.transform = ' translate(-50%, -50%) scale(1)'
+    })
+    window.addEventListener('mousedown', () => {
+        cd.style.transform = ' translate(-50%, -50%) scale(3)'
+    })
+
+    window.addEventListener('contextmenu', (e) => {
+        e.preventDefault()
+        console.log('right click default is ban..!')
+        let x = e.clientX
+        let y = e.clientY
+        rc.style.display = 'block'
+        if ((x + 250) < w) {
+            rc.style.left = x + 'px'
+        } else {
+            rc.style.left = (x - 250) + 'px'
+        }
+        if ((y + 210) < h) {
+            rc.style.top = y + 'px'
+        } else {
+            rc.style.top = (y - 280) + 'px'
+        }
+
+    })
+    window.addEventListener('click', () => {
+        rc.style.display = 'none'
+    })
+    const myDrag = document.querySelector('.drag')
+    const myDrop = document.querySelector('.drop')
+    let x = 0
+    let y = 0
+    let dropTop = myDrop.offsetTop
+    let dropLeft = myDrop.offsetLeft
+
+    myDrag.addEventListener('mousedown', () => {
+        myDrag.classList.remove('zero')
+        window.addEventListener('mousemove', para)
+    })
+    myDrag.addEventListener('mouseup', () => {
+        window.removeEventListener('mousemove', para)
+        if ((x + 50) >= dropLeft && (y + 50) >= dropTop) {
+            myDrag.classList.add('next')
+            setTimeout(() => {
+                myDrag.remove()
+            }, 1000);
+        } else {
+            myDrag.classList.add('zero')
+        }
+    })
+
+
+    function para(e) {
+        x = e.clientX
+        y = e.clientY
+        myDrag.style.top = y + 'px'
+        myDrag.style.left = x + 'px'
+    }
+
+    myDrag.addEventListener("mousedown", (e) => {
+        let cx = e.offsetX
+        let cy = e.offsetY
+        console.log(cx);
+
+        myDrag.style.transform = 'translate(-' + cx + 'px, -' + cy + 'px)'
+        para(e)
+    })
+
+</script>
+
+</html>
